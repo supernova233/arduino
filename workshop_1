@@ -1,0 +1,48 @@
+int led_r = 8;
+int led_g = 9;
+int led_b = 10;
+int led_w = 11;
+int led[] = {led_r,led_g,led_b,led_w};
+
+int mode = 0;
+int sw[] = {7,6,5,4};
+int btn[]= {0,0,0,0};
+int lock = 0;
+
+int reading;
+int key_sw[] = {1,1,1,1};
+int state[] = {0,0,0,0};
+
+void setup()
+{
+	pinMode(led_r, OUTPUT);
+	pinMode(led_g, OUTPUT);                                                                  
+	pinMode(led_b, OUTPUT);
+	pinMode(led_w, OUTPUT);
+	for(int l=0; l<4; l++){
+	    pinMode(sw[l], INPUT);
+	}
+	
+  
+}
+
+void loop()
+{
+
+	for(int i=0; i<4; i++){
+		reading = digitalRead(sw[i]);
+
+		if(reading == 0 && key_sw[i] == 1){
+		    delay(50);
+		    	if(digitalRead(sw[i]) == 0){
+		    	    state[i] = !state[i];
+		    	    digitalWrite(led[i], state[i]);
+		    	}
+
+		}
+	 key_sw[i] = reading;
+  
+	}	
+		
+	
+}
