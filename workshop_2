@@ -1,0 +1,92 @@
+int led_r = 8;
+int led_g = 9;
+int led_b = 10;
+int led_w = 11;
+int led[] = {led_r,led_g,led_b,led_w};
+
+int sw[] = {7,6,5,4};
+
+int reading;
+int key_sw[] = {1,1,1,1};
+int Speeds[] ={30,20,10,4};
+int currSpeed = 600;
+
+int in_key;
+
+void setup()
+{	
+	Serial.begin(9600);
+	pinMode(led_r, OUTPUT);
+	pinMode(led_g, OUTPUT);                                                                  
+	pinMode(led_b, OUTPUT);
+	pinMode(led_w, OUTPUT);
+	for(int l=0; l<4; l++){
+	    pinMode(sw[l], INPUT);
+	}
+   	
+   	   
+
+}
+
+void loop()
+{
+	for(int i=0; i<4; i++){
+		reading = digitalRead(sw[i]);
+
+		if(reading == 0 && key_sw[i] == 1){
+		    delay(5);
+		    	if(digitalRead(sw[i]) == 0){						// Switch 
+		    	  	
+		     		currSpeed = Speeds[i] * 20;
+		     		Serial.println();
+		     		Serial.print("DelayTime : ");
+		     		Serial.print(currSpeed);
+		     		   
+		     		
+                    
+		     			
+		    	}
+		}
+	 
+	 key_sw[i] = reading;
+  	
+	}
+
+	if(Serial.available() > 0){										// Keyboard
+	    in_key = Serial.read();
+	    if(in_key >= 49 && in_key <= 53){
+	       
+	        Serial.println("");
+	        Serial.print("KeyPress : ");
+	        Serial.write(in_key);
+
+	        if(in_key == 49){
+	           currSpeed = Speeds[0] * 20; 
+	        }else if(in_key == 50){
+	            currSpeed = Speeds[1] * 20;
+	        }else if(in_key == 51){
+	        	currSpeed = Speeds[2] * 20;
+	        }else if(in_key == 52){
+	        	currSpeed = Speeds[3] * 20;    
+	        }
+
+	    }
+
+	}
+	
+  bips ();
+  
+}
+
+void bips () {
+    
+  for(int j=0; j<4; j++){
+	    digitalWrite(led[j], 1);
+	}
+	delay(currSpeed);
+	for(int k=0; k<4; k++){
+	    digitalWrite(led[k], 0);
+	}
+	delay(currSpeed);     
+
+}
