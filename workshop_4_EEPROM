@@ -1,0 +1,55 @@
+
+#include <EEPROM.h>
+
+int addr = 0;
+int val = 255;
+int L = 0;
+void setup()
+{
+  Serial.begin(9600);
+
+}
+
+void loop()
+{
+  
+  if(addr < 512){                     //เขียน
+      for(int i=0; i<512; i++){
+        
+        EEPROM.write(addr, val);     //เขียนลง EEPROM
+        addr++;
+        
+        if(addr < 256){
+           val--;                   //  ลบค่า val ที่ละ 1 ไปเรื่อยๆ จนกว่า ค่า addr จะมากกว่า 256
+        }else if(addr > 256){
+            val++;                  // เมือ addr มีค่ามากกว่า 256 ให้ ค่า val บวกที่ละ 1 ไปเลื่อยๆ
+        }
+        
+        delay(20);
+      
+      }
+      
+  }
+
+  byte read_val;                        // สร้างตัวแปร์ เอาไว้เก็บค่าที่อ่านจาก EEPROM
+  if(addr == 512 && L == 0){            // อ่าน  ,   L คือ ให้มันอ่าน รอเดียว
+     
+    for(int i=0; i<512; i++){ 
+
+      read_val = EEPROM.read(i);      // ทำการเก็บค่า ที่อ่านได้จาก EEPROM ไปเก็บไว้ใน ตัวแปร์ read_val
+
+      Serial.print("Address :");
+      Serial.print("\t");             // \t คือ  Tab
+      Serial.print(i);
+      Serial.print("\t");
+      Serial.print(read_val, DEC);     // แสดงค่าที่เก็บไว้ใน ตัวแปร์ read_val , DEC คือให้แสดงออกมาเป็นเลข ฐาน 10
+      Serial.println();
+    }
+
+    L = !L;                           //  invert ค่า คือ จาก 1 ให้เป็น 0 หรือ จาก 0 ให้เป็น 1
+
+  }
+  
+  
+
+}
