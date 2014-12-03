@@ -1,0 +1,36 @@
+
+#include <Servo.h> 
+ 
+Servo myservo;    
+
+int SERVO_PIN = 9;
+int degree = 0;
+int KeyASCII;
+ 
+void setup() 
+{ 
+  myservo.attach(SERVO_PIN); 
+  Serial.begin(9600);
+} 
+ 
+void loop() 
+{ 
+
+  if(Serial.available() > 0 ){
+    KeyASCII = Serial.read();
+      if(KeyASCII == 65){
+          degree = degree + 5;
+          if(degree >= 180){
+              degree = 180;
+          }
+      }else if(KeyASCII == 66){
+          degree = degree - 5;
+          if(degree <= 1){
+              degree = 0;
+          }
+      }
+  }
+    myservo.write(degree);              
+                  
+
+} 
