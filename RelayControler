@@ -1,0 +1,56 @@
+
+
+char in_data;			// สร้างตัวแปล เอาไว้เก็บค่าที่อ่านจาก SerialPort
+
+int relay_pin1 = 3;		// กำหนด pin ที่จะเอาไปควบคุม relay
+int relay_pin2 = 4;
+int relay_pin3 = 5;
+
+
+void setup()
+{
+	
+	Serial.begin(9600);				// เปิดใช้งาน serial port โดยมี Baud rate อยู่ที่ 9600
+
+	pinMode(relay_pin1, OUTPUT);	// กำหนด pin ให้เป็น โหมด Output
+	pinMode(relay_pin2, OUTPUT);
+	pinMode(relay_pin3, OUTPUT);
+}
+
+
+void loop()
+{
+	if(Serial.availabel() > 0) {		// เช็ค ว่า ถ้ามีอะไรส่งมาใน serialport  ก็ให้ทำงานตามโค้ดที่อยู่ใน {}
+
+
+	    
+	    in_data = Serial.read();    // อ่านค่าจาก serialport แล้วเก็บไว้ในตัวแปล in_data
+
+
+
+	    if(in_data == "1"){					// เช็คว่า ถ้า ตัวแปล in_data มีค่า เท่ากับ  1 ก็ให้ relay_pin1 มีไฟออก
+	        digitalWrite(relay_pin1, 1);
+	    }
+	    if(in_data == "a"){
+	        digitalWrite(relay_pin1, 0);	// เช็คว่า ถ้า ตัวแปล in_data มีค่า เท่ากับ  a ก็ให้ relay_pin1 ไม่มีไฟ
+	    }
+
+
+	    if(in_data == "2"){
+	        digitalWrite(relay_pin2, 1);	// เช็คว่า ถ้า ตัวแปล in_data มีค่า เท่ากับ  2 ก็ให้ relay_pin2 มีไฟออก
+	    }
+	    if(in_data == "b"){
+	        digitalWrite(relay_pin2, 0);	// เช็คว่า ถ้า ตัวแปล in_data มีค่า เท่ากับ  b ก็ให้ relay_pin2 ไม่มีไฟ
+	    }
+
+
+	    if(in_data == "3"){
+	        digitalWrite(relay_pin3, 1);
+	    }
+	    if(in_data == "c"){
+	        digitalWrite(relay_pin3, 0);
+	    }
+
+	}
+
+}
