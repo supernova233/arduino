@@ -1,0 +1,268 @@
+Imports System.IO.Ports
+
+Class MainWindow
+
+    Dim c(16) As String
+    Dim SerialPort1 As String() = System.IO.Ports.SerialPort.GetPortNames
+    Dim serial1 As SerialPort
+    Dim chk_connect As String = "0"
+
+
+    Private Sub MainWindow_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+
+
+        txt_status.Content = "Serial not Connect"
+        txt_status.Foreground = Brushes.Tomato
+
+        For val As Integer = 0 To 15 Step +1
+            c(val) = "0"
+        Next
+
+
+
+    End Sub
+
+    Private Sub btn_serial_connet_Click(sender As Object, e As RoutedEventArgs) Handles btn_serial_connet.Click
+        serial1 = New SerialPort()
+        Dim ports As String() = SerialPort.GetPortNames()
+
+
+        Dim port As String
+        Dim Select_port As String = "0"
+        For Each port In ports
+            Select_port = port
+        Next port
+        If Select_port IsNot "0" Then
+
+            serial1.PortName = Select_port
+            serial1.BaudRate = 9600
+
+            btn_serial_connet.Content = "Connected"
+            btn_serial_connet.Background = Brushes.Lime
+            txt_status.Content = "Conntct to " + Select_port
+            txt_status.Foreground = Brushes.Lime
+
+            chk_connect = "1"
+        Else
+            txt_status.Content = "Please connet USB "
+            txt_status.Foreground = Brushes.Orange
+
+        End If
+
+
+
+
+
+
+
+    End Sub
+
+    Private Sub btn_CH_1_Click(sender As Object, e As RoutedEventArgs) Handles btn_CH_1.Click
+        If chk_connect IsNot "0" Then
+
+            If c(0) = "0" Then
+                btn_CH_1.Background = Brushes.Tomato
+                btn_CH_1.Content = "OFF"
+
+                serial1.Open()
+                serial1.Write("0")
+                serial1.Close()
+
+                c(0) = "1"
+            ElseIf c(0) = "1" Then
+
+                btn_CH_1.Background = Brushes.SpringGreen
+                btn_CH_1.Content = "ON"
+
+                serial1.Open()
+                serial1.Write("0")
+                serial1.Close()
+
+                c(0) = "0"
+            End If
+        End If
+    End Sub
+
+    Private Sub btn_CH_2_Click(sender As Object, e As RoutedEventArgs) Handles btn_CH_2.Click
+        If chk_connect IsNot "0" Then
+
+            If c(1) = "0" Then
+                btn_CH_2.Background = Brushes.Tomato
+                btn_CH_2.Content = "OFF"
+
+                serial1.Open()
+                serial1.Write("1")
+                serial1.Close()
+
+                c(1) = "1"
+            ElseIf c(1) = "1" Then
+
+                btn_CH_2.Background = Brushes.SpringGreen
+                btn_CH_2.Content = "ON"
+
+                serial1.Open()
+                serial1.Write("1")
+                serial1.Close()
+
+                c(1) = "0"
+            End If
+        End If
+    End Sub
+
+    Private Sub btn_CH_3_Click(sender As Object, e As RoutedEventArgs) Handles btn_CH_3.Click
+        If chk_connect IsNot "0" Then
+
+            If c(2) = "0" Then
+                btn_CH_3.Background = Brushes.Tomato
+                btn_CH_3.Content = "OFF"
+
+                serial1.Open()
+                serial1.Write("2")
+                serial1.Close()
+
+                c(2) = "1"
+            ElseIf c(2) = "1" Then
+
+                btn_CH_3.Background = Brushes.SpringGreen
+                btn_CH_3.Content = "ON"
+
+                serial1.Open()
+                serial1.Write("2")
+                serial1.Close()
+
+                c(2) = "0"
+            End If
+        End If
+    End Sub
+
+    Private Sub btn_CH_4_Click(sender As Object, e As RoutedEventArgs) Handles btn_CH_4.Click
+        If chk_connect IsNot "0" Then
+
+            If c(3) = "0" Then
+                btn_CH_4.Background = Brushes.Tomato
+                btn_CH_4.Content = "OFF"
+
+                serial1.Open()
+                serial1.Write("3")
+                serial1.Close()
+
+                c(3) = "1"
+            ElseIf c(3) = "1" Then
+
+                btn_CH_4.Background = Brushes.SpringGreen
+                btn_CH_4.Content = "ON"
+
+                serial1.Open()
+                serial1.Write("3")
+                serial1.Close()
+
+                c(3) = "0"
+            End If
+        End If
+    End Sub
+
+
+    Private Sub btn_CH_5_Click(sender As Object, e As RoutedEventArgs) Handles btn_CH_5.Click
+        If chk_connect IsNot "0" Then
+
+            If c(4) = "0" Then
+                btn_CH_5.Background = Brushes.Tomato
+                btn_CH_5.Content = "OFF"
+
+                serial1.Open()
+                serial1.Write("4")
+                serial1.Close()
+
+                c(4) = "1"
+            ElseIf c(4) = "1" Then
+
+                btn_CH_5.Background = Brushes.SpringGreen
+                btn_CH_5.Content = "ON"
+
+                serial1.Open()
+                serial1.Write("4")
+                serial1.Close()
+
+                c(4) = "0"
+            End If
+        End If
+    End Sub
+
+    Private Sub btn_CH_6_Click(sender As Object, e As RoutedEventArgs) Handles btn_CH_6.Click
+        If chk_connect IsNot "0" Then
+
+            If c(5) = "0" Then
+                btn_CH_6.Background = Brushes.Tomato
+                btn_CH_6.Content = "OFF"
+
+                serial1.Open()
+                serial1.Write("5")
+                serial1.Close()
+
+                c(5) = "1"
+            ElseIf c(5) = "1" Then
+
+                btn_CH_6.Background = Brushes.SpringGreen
+                btn_CH_6.Content = "ON"
+
+                serial1.Open()
+                serial1.Write("5")
+                serial1.Close()
+
+                c(5) = "0"
+            End If
+        End If
+    End Sub
+
+    Private Sub btn_CH_7_Click(sender As Object, e As RoutedEventArgs) Handles btn_CH_7.Click
+        If chk_connect IsNot "0" Then
+
+            If c(6) = "0" Then
+                btn_CH_7.Background = Brushes.Tomato
+                btn_CH_7.Content = "OFF"
+
+                serial1.Open()
+                serial1.Write("6")
+                serial1.Close()
+
+                c(6) = "1"
+            ElseIf c(6) = "1" Then
+
+                btn_CH_7.Background = Brushes.SpringGreen
+                btn_CH_7.Content = "ON"
+
+                serial1.Open()
+                serial1.Write("6")
+                serial1.Close()
+
+                c(6) = "0"
+            End If
+        End If
+    End Sub
+
+    Private Sub btn_CH_8_Click(sender As Object, e As RoutedEventArgs) Handles btn_CH_8.Click
+        If chk_connect IsNot "0" Then
+
+            If c(7) = "0" Then
+                btn_CH_8.Background = Brushes.Tomato
+                btn_CH_8.Content = "OFF"
+
+                serial1.Open()
+                serial1.Write("7")
+                serial1.Close()
+
+                c(7) = "1"
+            ElseIf c(7) = "1" Then
+
+                btn_CH_8.Background = Brushes.SpringGreen
+                btn_CH_8.Content = "ON"
+
+                serial1.Open()
+                serial1.Write("7")
+                serial1.Close()
+
+                c(7) = "0"
+            End If
+        End If
+    End Sub
+End Class
